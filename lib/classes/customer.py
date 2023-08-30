@@ -9,6 +9,7 @@ class Customer:
     def __repr__(self):
         return f"Customer(id={self.id}, name={self.name})"
 
+
     @classmethod
     def create_table(cls):
         sql="""CREATE TABLE IF NOT EXISTS customers (
@@ -18,3 +19,10 @@ class Customer:
         """
 
         CURSOR.execute(sql)
+
+    def create(self):
+        sql = """INSERT INTO customers (name) VALUES (?)
+        """
+
+        CURSOR.execute(sql, [self.name])
+        CONN.commit()
